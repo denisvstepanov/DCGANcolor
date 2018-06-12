@@ -35,5 +35,6 @@ def to_image_tensor(input_tensor, n_rows=9, n_cols=9, width=64, height=64):
         image_grid[:, r * height:(r + 1) * height, c * width:(c + 1) * width] = tensor_to_plot[i, :].reshape(3, width, height)
     return torch.Tensor(image_normalize(image_grid))
 
+
 def grayscale(image):
     return torch.mean(image, dim=1, keepdim=True)
