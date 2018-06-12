@@ -5,9 +5,8 @@ import torch
 from torch.autograd import Variable
 from torch import nn, optim
 from torch.utils.data import DataLoader
-from torchvision import transforms
 
-from scripts.model import Discriminator, Generator, noise, init_weights
+from scripts.model import Discriminator, Generator, init_weights
 from scripts.helper_cifar import ones_tensor, zeros_tensor, to_image_tensor, grayscale
 from scripts.data import get_data
 from visualization.plotter import TensorboardPlotter
