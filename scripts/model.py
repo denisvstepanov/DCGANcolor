@@ -77,8 +77,13 @@ class Generator(nn.Module):
         super().__init__()
 
         self.conv1 = nn.Sequential(
-            contracting_conv(1, 1024),
+            contracting_conv(1, 128),
             nn.LeakyReLU(negative_slope)
+        )
+        self.hidden1 = nn.Sequential(
+            ContractingBlock(128),
+            ContractingBlock(256),
+            ContractingBlock(512)
         )
         self.hidden = nn.Sequential(
             ExpandingBlock(1024),
@@ -91,9 +96,12 @@ class Generator(nn.Module):
         )
 
     def forward(self, x):
+        input = x
         x = self.conv1(x)
+        x = self.hidden1(x)
         x = self.hidden(x)
         x = self.out(x)
+        x = x  + input
         return x
 
 
